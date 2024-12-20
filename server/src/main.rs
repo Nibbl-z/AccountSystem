@@ -1,44 +1,44 @@
-use actix_web::{get, App, web, HttpResponse, HttpServer, Responder};
+use actix_web::{get, post, App, web, HttpResponse, HttpServer, Responder};
 use sqlx::postgres::PgPoolOptions;
 use std::env;
 use dotenv::dotenv;
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+struct SignupData {
+    username: String,
+    password: String
+}
+
+#[post("/signup")]
+async fn signup(data: web::Json<SignupData>, pool: web::Data<sqlx::PgPool>) -> impl Responder {
+    let result = sqlx::query!(
+        "INSERT INTO users (username, password) VALUES ($1, $2)",
+        data.username,
+        data.password
+    ).execute(pool.get_ref())
+    .await;
+
+    match result {
+        Ok (_) => HttpResponse::Ok().body(format!("{} has signed up successfully!!!", data.username)),
+        Err (_) => HttpResponse::InternalServerError().body("Something BAD happened.")
+    }
+}
 
 #[get("/")]
 async fn hello(pool: web::Data<sqlx::PgPool>) -> impl Responder {
-    let rows = sqlx::query!("SELECT * FROM users")
-        .fetch_all(pool.get_ref())
-        .await
-        .expect("Failed to execute query");
-    
-    let mut response: String = String::from("There is: ");
-    let mut index = 0;
-    let length = rows.len();
+    let rows = sqlx::query!("SELECT id, username, password FROM users")
+    .fetch_all(pool.get_ref())
+    .await
+    .expect("Query failed");
 
-    for row in rows {
-        match row.name {
-            Some(name) => {
-                if index == length - 1 {
-                    response.push_str(" AND LAST BUT NOT LEAST!!!: ");
-                } else if index > 0 {
-                    response.push_str(" AND ");
-                }
-                
-                response.push_str(&name);
-                
-                
-            },
-            None => {}
-        }
-
-        index += 1;
-    }
-
-    HttpResponse::Ok().body(response)
+    HttpResponse::Ok().body(format!("{:#?}", rows))
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     dotenv().ok();
+
     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
     let pool = PgPoolOptions::new()
         .max_connections(5)
@@ -49,8 +49,8 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .app_data(web::Data::new(pool.clone()))
             .service(hello)
+            .service(signup)
     })
-    .bind(("127.0.0.1", 4000))?
-    .run()
-    .await
+    
+    .bind(("127.0.0.1", 4000))?.run().await
 }
