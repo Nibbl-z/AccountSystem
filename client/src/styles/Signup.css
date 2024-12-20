@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(225, 141, 255);
+    width: 40vh;
+    aspect-ratio: 1/1.5;
+    box-shadow: 0px 0px 10px;
+    border-radius: 5px;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+html, body {
+    overflow: hidden;
+    background-image: radial-gradient(rgb(47, 47, 47), rgb(18, 18, 18));
+}
