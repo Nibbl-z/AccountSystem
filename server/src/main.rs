@@ -1,4 +1,5 @@
 use actix_web::{get, post, App, web, HttpResponse, HttpServer, Responder};
+use actix_cors::Cors;
 use sqlx::postgres::PgPoolOptions;
 use std::env;
 use dotenv::dotenv;
@@ -12,6 +13,8 @@ struct SignupData {
 
 #[post("/signup")]
 async fn signup(data: web::Json<SignupData>, pool: web::Data<sqlx::PgPool>) -> impl Responder {
+    println!("{}, {}", data.username, data.password);    
+    
     let result = sqlx::query!(
         "INSERT INTO users (username, password) VALUES ($1, $2)",
         data.username,
@@ -47,6 +50,12 @@ async fn main() -> std::io::Result<()> {
     
     HttpServer::new(move || {
         App::new()
+        .wrap(
+            Cors::default()
+            .allow_any_origin()
+            .allow_any_header()
+            .allow_any_method()
+        )
             .app_data(web::Data::new(pool.clone()))
             .service(hello)
             .service(signup)
