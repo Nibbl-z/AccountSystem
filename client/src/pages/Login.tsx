@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import '../styles/Signup.css'
 
-function Signup() {
+
+
+function Login() {
     const [statusMessage, setStatusMessage] = useState("")
     const [statusColor, setStatusColor] = useState("statusSuccess")
-    
-    function OnSignup(event) {
+
+    function OnLogin(event) {
         event.preventDefault()
         
         const formData = new FormData(event.target)
@@ -16,7 +18,7 @@ function Signup() {
         headers.append('Content-Type', 'application/json')
         
         
-        fetch('http://localhost:4000/signup', {
+        fetch('http://localhost:4000/login', {
             "headers" : headers,
             "method" : "POST",
             "body" : JSON.stringify({'username' : username, 'password' : password})
@@ -31,19 +33,19 @@ function Signup() {
     return (
         <div className='wrapper'>
             <div className='container'>
-                <h1>Signup</h1>
+                <h1>Login</h1>
                 <br />
-                <form onSubmit={OnSignup}>
+                <form onSubmit={OnLogin}>
                     <label htmlFor="username">Username:</label>
                     <input type="text" name="username"/>
                     <label htmlFor="password">Password:</label>
                     <input type="password" name="password"/>
                     <label htmlFor="submit" className={statusColor}>{statusMessage}</label>
-                    <input type="submit" value="Submit" className="submitButton"/>
+                    <input type="submit" value="Login" className="submitButton"/>
                 </form>
             </div>
         </div>
     )  
 }
 
-export default Signup
+export default Login

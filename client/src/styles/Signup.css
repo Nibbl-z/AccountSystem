@@ -52,3 +52,11 @@ input {
 .submitButton {
     margin-top: auto
 }
+
+.statusSuccess {
+    color: lime
+}
+
+.statusError {
+    color: red
+}

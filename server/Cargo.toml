@@ -10,3 +10,5 @@ sqlx = { version = "0.8", features = [ "runtime-tokio", "tls-rustls-ring", "post
 dotenv = "0.15.0"
 serde = "1.0.216"
 actix-cors = "0.7.0"
+aes-gcm = "0.10.3"
+base64 = "0.22.1"
