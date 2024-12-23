@@ -17,15 +17,20 @@ function Login() {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json')
         
-        
         fetch('http://localhost:4000/login', {
             "headers" : headers,
             "method" : "POST",
             "body" : JSON.stringify({'username' : username, 'password' : password})
         }).then(response => { 
-            response.text().then(result => {
+            response.json().then(result => {
                 setStatusColor(response.ok ? "statusSuccess" : "statusError")
-                setStatusMessage(result)
+                
+                if (response.ok) {
+                    document.cookie = `token=${result}; path=/;`
+                    setStatusMessage("Logged in successfully!")
+                } else {
+                    setStatusMessage(result)
+                }
             })
         })
     }
