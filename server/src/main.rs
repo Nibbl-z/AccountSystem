@@ -22,6 +22,7 @@ async fn main() -> std::io::Result<()> {
     dotenv().ok();
 
     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+    let port = env::var("PORT").expect("Port should be set").parse::<u16>().expect("PORT should be a valid u16");
     let pool = PgPoolOptions::new()
         .max_connections(5)
         .connect(&database_url).await
@@ -42,5 +43,5 @@ async fn main() -> std::io::Result<()> {
             .service(web::resource("/api/home").route(web::get().to(routes::home::home)))
     })
     
-    .bind(("localhost", 4020))?.run().await
+    .bind(("localhost", port))?.run().await
 }
