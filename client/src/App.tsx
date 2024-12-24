@@ -3,15 +3,15 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Signup from './pages/Signup.tsx'
 import Login from './pages/Login.tsx'
-import TestAuthorization from './pages/TestAuthorization.tsx'
+import Home from './pages/Home.tsx'
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Signup/>}/>
+        <Route path="/signup" element={<Signup/>}/>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/test" element={<TestAuthorization/>}/>
+        <Route path="/" element={<Home/>}/>
       </Routes>
     </Router>
   );

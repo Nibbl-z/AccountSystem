@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import '../styles/Signup.css'
+import Navbar from '../components/Navbar.tsx'
 
 function Signup() {
     const [statusMessage, setStatusMessage] = useState("")
@@ -29,6 +30,8 @@ function Signup() {
     }
     
     return (
+        <>
+        <Navbar/>
         <div className='wrapper'>
             <div className='container'>
                 <h1>Signup</h1>
@@ -39,10 +42,11 @@ function Signup() {
                     <label htmlFor="password">Password:</label>
                     <input type="password" name="password"/>
                     <label htmlFor="submit" className={statusColor}>{statusMessage}</label>
-                    <input type="submit" value="Submit" className="submitButton"/>
+                    <input type="submit" value="Signup" className="submitButton"/>
                 </form>
             </div>
         </div>
+        </>
     )  
 }
 

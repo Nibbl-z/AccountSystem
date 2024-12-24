@@ -10,17 +10,12 @@ mod routes {
     pub mod signup;
     pub mod login;
     pub mod test;
+    pub mod home;
 }
 
 #[get("/")]
-async fn hello(pool: web::Data<sqlx::PgPool>) -> impl Responder {
-    let rows = sqlx::query!("SELECT id, username, password, nonce FROM users")
-    .fetch_all(pool.get_ref())
-    .await
-    .expect("Query failed");
-    
-    
-    HttpResponse::Ok().body(format!("{:#?}", rows))
+async fn root() -> impl Responder {
+    HttpResponse::Ok().body("Hai! This is the backend.")
 }
 
 #[actix_web::main]
@@ -42,10 +37,10 @@ async fn main() -> std::io::Result<()> {
             .allow_any_method()
         )
             .app_data(web::Data::new(pool.clone()))
-            .service(hello)
+            .service(root)
             .service(web::resource("/signup").route(web::post().to(routes::signup::signup)))
             .service(web::resource("/login").route(web::post().to(routes::login::login)))
-            .service(web::resource("/test").route(web::get().to(routes::test::test_protected)))
+            .service(web::resource("/home").route(web::get().to(routes::home::home)))
     })
     
     .bind(("127.0.0.1", 4000))?.run().await

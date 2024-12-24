@@ -27,7 +27,7 @@ html, body {
     background-image: radial-gradient(rgb(47, 47, 47), rgb(18, 18, 18));
 }
 
-h1, label{
+h1, label, p{
     color: white;
     font-family: 'Nunito', sans-serif;
 }

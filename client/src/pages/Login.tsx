@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import '../styles/Signup.css'
+import Navbar from '../components/Navbar.tsx'
 
 
 
@@ -36,6 +37,8 @@ function Login() {
     }
     
     return (
+        <>
+        <Navbar/>
         <div className='wrapper'>
             <div className='container'>
                 <h1>Login</h1>
@@ -50,6 +53,7 @@ function Login() {
                 </form>
             </div>
         </div>
+        </>
     )  
 }
 
