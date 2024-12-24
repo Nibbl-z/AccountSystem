@@ -42,5 +42,5 @@ async fn main() -> std::io::Result<()> {
             .service(web::resource("/api/home").route(web::get().to(routes::home::home)))
     })
     
-    .bind(("localhost", 4000))?.run().await
+    .bind(("localhost", 4020))?.run().await
 }
