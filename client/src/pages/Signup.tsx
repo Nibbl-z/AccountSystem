@@ -17,7 +17,7 @@ function Signup() {
         headers.append('Content-Type', 'application/json')
         
         
-        fetch('https://accountsystem.nibbles.hackclub.app/api/signup', {
+        fetch('https://accountsystembackend.nibbles.hackclub.app/api/signup', {
             "headers" : headers,
             "method" : "POST",
             "body" : JSON.stringify({'username' : username, 'password' : password})
