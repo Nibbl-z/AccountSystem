@@ -24,8 +24,8 @@ function Home() {
     useEffect(() => {
         const headers = new Headers();
         headers.append('Authorization', `Bearer ${getCookie("token")}`)
-
-        fetch("http://localhost:4000/home", {
+        
+        fetch("https://accountsystem.nibbles.hackclub.app:4000/api/home", {
             method: "GET",
             headers: headers
         }).then(response => {

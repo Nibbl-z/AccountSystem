@@ -9,7 +9,6 @@ mod encrypt;
 mod routes {
     pub mod signup;
     pub mod login;
-    pub mod test;
     pub mod home;
 }
 
@@ -38,10 +37,10 @@ async fn main() -> std::io::Result<()> {
         )
             .app_data(web::Data::new(pool.clone()))
             .service(root)
-            .service(web::resource("/signup").route(web::post().to(routes::signup::signup)))
-            .service(web::resource("/login").route(web::post().to(routes::login::login)))
-            .service(web::resource("/home").route(web::get().to(routes::home::home)))
+            .service(web::resource("/api/signup").route(web::post().to(routes::signup::signup)))
+            .service(web::resource("/api/login").route(web::post().to(routes::login::login)))
+            .service(web::resource("/api/home").route(web::get().to(routes::home::home)))
     })
     
-    .bind(("127.0.0.1", 4000))?.run().await
+    .bind(("localhost", 4000))?.run().await
 }
