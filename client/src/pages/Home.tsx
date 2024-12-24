@@ -25,7 +25,7 @@ function Home() {
         const headers = new Headers();
         headers.append('Authorization', `Bearer ${getCookie("token")}`)
         
-        fetch("https://accountsystem.nibbles.hackclub.app:4000/api/home", {
+        fetch("https://accountsystem.nibbles.hackclub.app/api/home", {
             method: "GET",
             headers: headers
         }).then(response => {

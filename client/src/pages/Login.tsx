@@ -18,7 +18,7 @@ function Login() {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json')
         
-        fetch('https://accountsystem.nibbles.hackclub.app:4000/api/login', {
+        fetch('https://accountsystem.nibbles.hackclub.app/api/login', {
             "headers" : headers,
             "method" : "POST",
             "body" : JSON.stringify({'username' : username, 'password' : password})
