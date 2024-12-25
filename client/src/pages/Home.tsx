@@ -6,9 +6,7 @@ import Navbar from '../components/Navbar.tsx';
 
 function Home() {  
     const [image, imageSetter] = useState("")
-    const [message, messageSetter] = useState(
-        "Hai! This is an account system made with TypeScript + React for the frontend and Rust + ActixWeb for the backend. The users are stored in a Postgresql database, and the passwords are secured with AES encryption. When you login, an authentication token will be saved to your cookies, which will allow you to see an amazing image of a green goose when you return to this page. I hope you enjoy!!!!!"
-    )
+    const [message, messageSetter] = useState("Loading...")
     
     function getCookie(name) {
         const value = `; ${document.cookie}`;
@@ -34,6 +32,8 @@ function Home() {
                     imageSetter(data.goose)
                     messageSetter("Welcome back, " + data.username + "!")
                 }) 
+            } else {
+                messageSetter("Hai! This is an account system made with TypeScript + React for the frontend and Rust + ActixWeb for the backend. The users are stored in a Postgresql database, and the passwords are secured with bcrypt hashing. When you login, an authentication token will be saved to your cookies, which will allow you to see an amazing image of a green goose when you return to this page. I hope you enjoy!!!!!")
             }
         })
     }, []) // what the react
