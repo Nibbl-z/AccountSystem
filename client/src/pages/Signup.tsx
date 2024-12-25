@@ -25,10 +25,12 @@ function Signup() {
             response.text().then(result => {
                 setStatusColor(response.ok ? "statusSuccess" : "statusError")
                 setStatusMessage(result)
-
-                setTimeout(() => {
-                    window.location.replace("/login")
-                }, 2000)
+                
+                if (response.ok) {
+                    setTimeout(() => {
+                        window.location.replace("/login")
+                    }, 2000)
+                }
             })
         })
     }

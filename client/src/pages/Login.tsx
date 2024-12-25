@@ -29,7 +29,7 @@ function Login() {
                 if (response.ok) {
                     document.cookie = `token=${result}; path=/;`
                     setStatusMessage("Logged in successfully!")
-
+                    
                     setTimeout(() => {
                         window.location.replace("/")
                     }, 2000)
