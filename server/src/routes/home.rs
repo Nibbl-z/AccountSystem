@@ -1,7 +1,5 @@
 use std::{fs::File, io::Read};
-use base64::{prelude::BASE64_STANDARD, Engine};
 use actix_web::{HttpResponse, Responder, HttpRequest};
-use serde_json::json;
 use crate::security::authorization;
 
 pub async fn home(req: HttpRequest) -> impl Responder {
@@ -14,14 +12,11 @@ pub async fn home(req: HttpRequest) -> impl Responder {
                 let mut byte_buffer = Vec::new();
                 file.read_to_end(&mut byte_buffer).unwrap();
                 
-                let goose = BASE64_STANDARD.encode(&byte_buffer);
-                
                 return HttpResponse::Ok()
-                .content_type("application/json")
-                .json(json!({
-                    "username": token_data.claims.sub,
-                    "goose": goose
-                }))
+                .content_type("image/png")
+                .insert_header(("X-Username", token_data.claims.sub))
+                .insert_header(("Access-Control-Expose-Headers", "X-Username"))
+                .body(byte_buffer);
             }
             None => return HttpResponse::Unauthorized().body("Authorization was unsuccessful")
         }
