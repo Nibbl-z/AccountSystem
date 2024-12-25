@@ -52,7 +52,7 @@ function Login() {
                     <input type="text" name="username"/>
                     <label htmlFor="password">Password:</label>
                     <input type="password" name="password"/>
-                    <label htmlFor="submit" className={statusColor}>{statusMessage}</label>
+                    {statusMessage !== "" && <label htmlFor="submit" className={statusColor}>{statusMessage}</label>}
                     <input type="submit" value="Login" className="submitButton"/>
                 </form>
             </div>

@@ -9,6 +9,21 @@ pub struct SignupData {
 }
 
 pub async fn signup(data: web::Json<SignupData>, pool: web::Data<sqlx::PgPool>) -> impl Responder {
+    if data.username.chars().count() < 3 {
+        return HttpResponse::BadRequest().body("Username must be longer than 3 characters!")
+    }
+    if data.username.chars().count() > 20 {
+        return HttpResponse::BadRequest().body("Username must be shorter than 20 characters!")
+    }
+
+    if data.password.chars().count() < 8 {
+        return HttpResponse::BadRequest().body("Password must be longer than 8 characters!")
+    }
+
+    if data.password.chars().count() > 32 {
+        return HttpResponse::BadRequest().body("Password must be less than 32 characters!")
+    }
+
     let find_username = sqlx::query(
         "SELECT username FROM users WHERE LOWER(username)=$1",
     )

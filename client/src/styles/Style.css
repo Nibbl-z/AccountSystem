@@ -11,10 +11,9 @@
     background-color: rgb(51, 75, 154);
     border-style: outset;
     width: 40vh;
+
     aspect-ratio: 1/1.5;
     border-radius: 10px;
-    
-    overflow-x: 
 }
 
 .wrapper {
@@ -46,9 +45,13 @@ label {
 }
 
 input {
-    color: black;
+    color: white;
     font-family: 'Nunito', sans-serif;
     font-size: 20px;
+    background-color: rgb(26, 41, 93);
+    border-radius: 10px;
+    border-style: outset;
+    border-color: white;
 }
 
 p {
@@ -59,10 +62,26 @@ p {
     margin-top: auto
 }
 
+.submitButton:hover {
+    background-color: rgb(10, 19, 52);
+}
+.submitButton:active {
+    background-color: rgb(10, 19, 49);
+}
+
+
 .statusSuccess {
-    color: lime
+    color: white;
+    font-weight: bolder;
+    background-color: rgb(85, 255, 79);
+    border-radius: 10px;
+    padding: 5px;
 }
 
 .statusError {
-    color: red
+    color: white;
+    font-weight: bolder;
+    background-color: rgb(255, 62, 62);
+    border-radius: 10px;
+    padding: 5px;
 }

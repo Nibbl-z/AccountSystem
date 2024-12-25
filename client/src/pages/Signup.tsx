@@ -45,7 +45,7 @@ function Signup() {
                     <input type="text" name="username"/>
                     <label htmlFor="password">Password:</label>
                     <input type="password" name="password"/>
-                    <label htmlFor="submit" className={statusColor}>{statusMessage}</label>
+                    {statusMessage !== "" && <label htmlFor="submit" className={statusColor}>{statusMessage}</label>}
                     <input type="submit" value="Signup" className="submitButton"/>
                 </form>
             </div>
