@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import '../styles/Signup.css'
+import '../styles/Style.css'
 import Navbar from '../components/Navbar.tsx'
 
 function Signup() {
@@ -25,6 +25,10 @@ function Signup() {
             response.text().then(result => {
                 setStatusColor(response.ok ? "statusSuccess" : "statusError")
                 setStatusMessage(result)
+
+                setTimeout(() => {
+                    window.location.replace("/login")
+                }, 2000)
             })
         })
     }

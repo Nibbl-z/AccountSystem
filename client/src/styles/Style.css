@@ -6,13 +6,15 @@
     justify-content: space-between;
     align-items: top;
     box-sizing: border-box;
-    padding: 1%;
-
-    background-color: rgb(16, 23, 46);
+    padding: 1em;
+    
+    background-color: rgb(51, 75, 154);
+    border-style: outset;
     width: 40vh;
     aspect-ratio: 1/1.5;
-    box-shadow: 0px 0px 30px 10px rgb(0, 0, 0);
-    border-radius: 5px;
+    border-radius: 10px;
+    
+    overflow-x: 
 }
 
 .wrapper {
@@ -24,7 +26,7 @@
 
 html, body {
     overflow: hidden;
-    background-image: radial-gradient(rgb(47, 47, 47), rgb(18, 18, 18));
+    background-image: radial-gradient(rgb(31, 29, 84), rgb(16, 23, 59));
 }
 
 h1, label, p{
@@ -47,6 +49,10 @@ input {
     color: black;
     font-family: 'Nunito', sans-serif;
     font-size: 20px;
+}
+
+p {
+    font-size: 125%;
 }
 
 .submitButton {

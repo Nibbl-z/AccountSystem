@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import '../styles/Signup.css'
+import '../styles/Style.css'
 import Navbar from '../components/Navbar.tsx';
 
 
@@ -33,7 +33,7 @@ function Home() {
                     imageSetter(URL.createObjectURL(blob))
                 })
             } else {
-                messageSetter("Hai! This is an account system made with TypeScript + React for the frontend and Rust + ActixWeb for the backend. The users are stored in a Postgresql database, and the passwords are secured with bcrypt hashing. When you login, an authentication token will be saved to your cookies, which will allow you to see an amazing image of a green goose when you return to this page. I hope you enjoy!!!!!")
+                messageSetter("Hai! This is an account system made with TypeScript + React for the frontend and Rust + ActixWeb for the backend. The users are stored in a PostgreSQL database, and the passwords are secured with bcrypt hashing. When you login, an authentication token will be saved to your cookies, which will allow you to see an amazing image of a green goose when you return to this page. I hope you enjoy!!!!!")
             }
         })
     }, []) // what the react

@@ -5,20 +5,23 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: black;
+        
+    background-color: rgb(51, 75, 154);
+    border-style: outset;
+    border-radius: 10px;
 }
 
 a {
     display: block;
-    padding: 8px;
-    background-color: black;
+    padding: 2vh;
     color: white;
     font-family: 'Nunito', sans-serif;
     text-decoration: none;
+    font-size: 150%;
 }
 
 a:hover {
-    background-color: grey;
+    background-color: rgb(44, 59, 110);
 }
 
 

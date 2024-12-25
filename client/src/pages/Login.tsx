@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import '../styles/Signup.css'
+import '../styles/Style.css'
 import Navbar from '../components/Navbar.tsx'
 
 
@@ -29,6 +29,10 @@ function Login() {
                 if (response.ok) {
                     document.cookie = `token=${result}; path=/;`
                     setStatusMessage("Logged in successfully!")
+
+                    setTimeout(() => {
+                        window.location.replace("/")
+                    }, 2000)
                 } else {
                     setStatusMessage(result)
                 }
