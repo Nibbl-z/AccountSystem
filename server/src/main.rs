@@ -4,7 +4,7 @@ use sqlx::postgres::PgPoolOptions;
 use std::env;
 use dotenv::dotenv;
 
-mod encrypt;
+mod security;
 
 mod routes {
     pub mod signup;

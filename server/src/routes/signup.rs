@@ -1,8 +1,6 @@
 use actix_web::{web, HttpResponse, Responder};
-use base64::{prelude::BASE64_STANDARD, Engine};
 use serde::Deserialize;
-
-use crate::encrypt;
+use bcrypt::{DEFAULT_COST, hash};
 
 #[derive(Deserialize)]
 pub struct SignupData {
@@ -23,18 +21,20 @@ pub async fn signup(data: web::Json<SignupData>, pool: web::Data<sqlx::PgPool>) 
         Ok(None) => {},
         Err(_) => return HttpResponse::InternalServerError().body("Database error")
     }
-
-    let (encrypted_password, nonce) = encrypt::encrypt(&data.password);
-    let password_base64 = BASE64_STANDARD.encode(encrypted_password);
-    let nonce_base64 = BASE64_STANDARD.encode(nonce);
-    println!("{}, {}", data.username, &password_base64);    
+    
+    let hashed_password = hash(&data.password, DEFAULT_COST);
+    
+    match hashed_password {
+        Ok(_) => {}
+        Err(_) => return HttpResponse::InternalServerError().body("Password failed to hash")
+    }
     
     let result = sqlx::query(
-        "INSERT INTO users (username, password, nonce) VALUES ($1, $2, $3)"
+        "INSERT INTO users (username, password) VALUES ($1, $2)"
     )
     .bind(data.username.clone())
-    .bind(password_base64)
-    .bind(nonce_base64).execute(pool.get_ref())
+    .bind(hashed_password.unwrap())
+    .execute(pool.get_ref())
     .await;
     
     match result {

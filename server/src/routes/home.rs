@@ -2,7 +2,7 @@ use std::{fs::File, io::Read};
 use base64::{prelude::BASE64_STANDARD, Engine};
 use actix_web::{HttpResponse, Responder, HttpRequest};
 use serde_json::json;
-use crate::encrypt::authorization;
+use crate::security::authorization;
 
 pub async fn home(req: HttpRequest) -> impl Responder {
     let auth_header = req.headers().get("Authorization");
